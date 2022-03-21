@@ -2,6 +2,7 @@ import './App.css';
 import axios from 'axios';
 import {useState, useEffect} from 'react'
 import {signUp, confirmUser} from './userAuth'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {
 
@@ -54,6 +55,10 @@ const submitConfirmEmail = async (e) => {
 
   const result = await confirmUser(userName, verified)
   console.log(result)
+  if(result === "SUCCESS") {
+    setPage("upload")
+  }
+
   console.log("confirmed",verified)
 
 }
@@ -61,6 +66,7 @@ const submitConfirmEmail = async (e) => {
   return (
     <div className="App">
     <h1>Serverless React App</h1>
+
 
     {page === "signup" &&
       <form onSubmit={submitSignup}>
